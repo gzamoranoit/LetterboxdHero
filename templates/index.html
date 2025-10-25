@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block head %}
+{% endblock  %}
+{% block body %}
+<h1>Who was the lead actor/actress in the {{year}} movie {{movie}}?</h1>   
+<h1 id="score"> Score: 0 </h1>  
+<h1 id="life"> Lives: 3 </h1>  
+<button id="right_button" class="button button1">{{actor}}</button>
+<button id="wrong_button1" class="button button2">{{WrongActor1}}</button>
+<button id="wrong_button2" class="button button3">{{WrongActor2}}</button>
+<button id="wrong_button3" class="button button3">{{WrongActor3}}</button>
+<button id="api-test-button">Test API Call</button>
+{% endblock  %}
