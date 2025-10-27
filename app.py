@@ -45,4 +45,5 @@ def get_distractor_actors(movie_year,lead_actor):
     results = execute_query_from_text(sql_query, params)
     return results
     
-    
+if __name__ == "__main__":
+    app.run(debug=True)
