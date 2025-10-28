@@ -26,12 +26,12 @@
 
     const savedScore = localStorage.getItem('userScore');
     if (savedScore) {
-        // If we find a saved score, we use it.
+        // If we find a saved score, we use it
         score = parseInt(savedScore);
         scoreSite = document.getElementById("score");
         scoreSite.textContent = "Score: " + score;
     } else {
-        // If not, it's a new game. Start at 0.
+        // New game case
         score = 0;
     }
         
@@ -77,12 +77,14 @@
             localStorage.setItem('userLife', life);  
         }
         
+        
     setTimeout(function() {
-        window.location.reload();
-    }, 2000); // 2000 milliseconds = 2 seconds
-        });     
-  });
-});
+        const nextUrl = `/?score=${score}`;
+        window.location.href = nextUrl;
+        },2000);// 2000 milliseconds = 2 seconds
+    });
+    });  
+});   
 
 </script>    
 </html>

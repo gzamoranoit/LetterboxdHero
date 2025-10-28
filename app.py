@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from database import fetch_query_from_file
 from database import execute_query_from_text
 
@@ -11,9 +11,22 @@ def generate_easy_trivia_question():
     if results:
         return results[0]
     
+def generate_medium_trivia_question():
+    print("Generating a new trivia question...")
+    sql_file = "get_random_medium_question.sql"
+    results = fetch_query_from_file(sql_file)
+    if results:
+        return results[0]
+        
 @app.route('/')
 def index():
-    results=generate_easy_trivia_question()
+    score_from_url = request.args.get('score', default=0, type=int)
+    print(f"--- New Request --- Score from URL is: {score_from_url}")
+    if score_from_url > 4:
+        results=generate_medium_trivia_question()
+    else:
+        results=generate_easy_trivia_question()    
+
     movie_title, movie_year, lead_actor = results # type: ignore
     movie_year=int(movie_year)
     results = get_distractor_actors(movie_year,lead_actor)
