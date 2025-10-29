@@ -17,7 +17,13 @@
         <img id="popup-image" src="" alt="Result Icon">
         <h2 id="popup-message"></h2> 
     </div>
+
+    <div id="game-over-text">
+        <h2> Game Over </h2> 
+        <button id="play-again"> Play Again</button>
+    </div>
 </div>    
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -54,7 +60,7 @@
     }
 
 
-    buttons = document.querySelectorAll("button")
+    buttons = document.querySelectorAll(".button-grid .button")
     const actorNames= [];
     buttons.forEach(function(button) {
         actorNames.push(button.textContent);
@@ -91,16 +97,33 @@
             localStorage.setItem('userScore', score); 
             localStorage.setItem('userLife', life);  
         }
-        popupOverlay.classList.remove('hidden')
+        document.getElementById('game-over-text').classList.add('hidden')
+        document.getElementById('popup-content').classList.remove('hidden')
+        document.getElementById('popup-overlay').classList.remove('hidden');
         
-        
+    if (life > 0)   {
     setTimeout(function() {
         const nextUrl = `/play?score=${score}`;
         popupOverlay.classList.add('hidden')
         window.location.href = nextUrl;
-        },2000);// 2000 milliseconds = 2 seconds
+       
+    },2000)// 2000 milliseconds = 2 seconds
+    } else
+    {
+        document.getElementById('popup-content').classList.add('hidden')
+        document.getElementById('game-over-text').classList.remove('hidden')
+        document.getElementById('popup-overlay').classList.remove('hidden');
+    }
+    ;
     });
     });  
+
+const gameOverButton = document.getElementById("play-again")    
+gameOverButton.addEventListener("click",function(){
+    const nextUrl = `/play?score=${score}`;
+    popupOverlay.classList.add('hidden')
+    window.location.href = nextUrl;
+})
 });   
 
 </script>    

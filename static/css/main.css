@@ -58,3 +58,7 @@ body {
 .hidden {
     display: none !important;
 }
+
+#game-over {
+    background-color: red;
+}
