@@ -5,8 +5,103 @@
 <h1>Who was the lead actor/actress in the {{year}} movie {{movie}}?</h1>   
 <h1 id="score"> Score: 0 </h1>  
 <h1 id="life"> Lives: 3 </h1>  
-<button id="right_button" class="button button1">{{actor}}</button>
-<button id="wrong_button1" class="button button2">{{WrongActor1}}</button>
-<button id="wrong_button2" class="button button3">{{WrongActor2}}</button>
-<button id="wrong_button3" class="button button3">{{WrongActor3}}</button>
+<div class = "button-grid">
+    <button id="right_button" class="button button1">{{actor}}</button>
+    <button id="wrong_button1" class="button button2">{{WrongActor1}}</button>
+    <button id="wrong_button2" class="button button3">{{WrongActor2}}</button>
+    <button id="wrong_button3" class="button button3">{{WrongActor3}}</button>
+</div>    
+
+<div id= "popup-overlay" class="hidden">
+    <div id="popup-content">
+        <img id="popup-image" src="" alt="Result Icon">
+        <h2 id="popup-message"></h2> 
+    </div>
+</div>    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+    const popupOverlay = document.getElementById('popup-overlay');
+    const popupImage = document.getElementById('popup-image');
+    const popupMessage = document.getElementById('popup-message');   
+    const savedLife = localStorage.getItem('userLife');
+    if (savedLife>0) {
+        life = parseInt(savedLife);
+        livesSite = document.getElementById("life");
+        livesSite.textContent = "Lives: " + life;
+    } else {
+        life = 3;
+    }
+        
+
+    const savedScore = localStorage.getItem('userScore');
+    if (savedScore) {
+        // If we find a saved score, we use it
+        score = parseInt(savedScore);
+        scoreSite = document.getElementById("score");
+        scoreSite.textContent = "Score: " + score;
+    } else {
+        // New game case
+        score = 0;
+    }
+        
+    function shuffle(array){
+        for(let i = array.length - 1; i > 0; i--){
+            const random = Math.floor((Math.random()*(i+1)));
+            [array[i], array[random]] =[array[random], array[i]]
+        }
+    }
+
+
+    buttons = document.querySelectorAll("button")
+    const actorNames= [];
+    buttons.forEach(function(button) {
+        actorNames.push(button.textContent);
+    });
+    shuffle(actorNames)
+    buttons.forEach(function(button, index) {
+        button.textContent = actorNames[index];
+    });
+    buttons.forEach(function(individual_button) {
+        individual_button.addEventListener('click', function() {
+        const clickedButton = event.target;
+        const selectedAnswer = clickedButton.textContent;
+        if (selectedAnswer == '{{actor}}') {
+            popupMessage.textContent = "Correct!"
+            popupImage.src = "{{ url_for('static', filename='images/tick.svg') }}"
+            console.log("CORRECT!")
+            score ++;
+            scoreSite = document.getElementById("score");
+            scoreSite.textContent = "Score: " + score;
+            localStorage.setItem('userScore', score);
+            localStorage.setItem('userLife', life);
+        } else {
+            popupMessage.textContent = "Wrong!"
+            popupImage.src = "{{ url_for('static', filename='images/error.svg') }}"
+            console.log("FALSE") 
+            life --;
+            if (life == 0) {
+                score = 0
+            }
+            livesSite = document.getElementById("life");
+            livesSite.textContent = "Lives: " + life;
+            scoreSite = document.getElementById("score");
+            scoreSite.textContent = "Score: " + score;
+            localStorage.setItem('userScore', score); 
+            localStorage.setItem('userLife', life);  
+        }
+        popupOverlay.classList.remove('hidden')
+        
+        
+    setTimeout(function() {
+        const nextUrl = `/play?score=${score}`;
+        popupOverlay.classList.add('hidden')
+        window.location.href = nextUrl;
+        },2000);// 2000 milliseconds = 2 seconds
+    });
+    });  
+});   
+
+</script>    
 {% endblock  %}

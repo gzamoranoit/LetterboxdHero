@@ -18,7 +18,12 @@ def generate_medium_trivia_question():
     if results:
         return results[0]
         
-@app.route('/')
+@app.route('/') 
+def menu():
+    return render_template('menu.html')
+
+
+@app.route('/play')
 def index():
     score_from_url = request.args.get('score', default=0, type=int)
     print(f"--- New Request --- Score from URL is: {score_from_url}")
