@@ -1,11 +1,21 @@
 @font-face {
-    font-family: 'Poster';
-    src: url('../fonts/FjallaOne-Regular.ttf') format('ttf');
+    font-family: 'Body';
+    src:
+        url('../fonts/FjallaOne-Regular.ttf') format("ttf");
 }
+
+@font-face {
+    font-family: 'Poster';
+    src:
+        url('../fonts/BBHSansBartle-Regular') format("ttf");
+}
+
+
+
 
 body {
     margin: 600;
-    font-family: Poster;
+    font-family: "Body";
     font-weight: bolder;
 }
 
@@ -59,6 +69,35 @@ body {
     display: none !important;
 }
 
-#game-over {
-    background-color: red;
+#game-over-text {
+    border-radius: 15px;
+    color: aliceblue;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 45px;
+}
+
+#title {
+    font-family: "Poster";
+    color: coral;
+    font-size: 100px;
+    text-align: center;
+}
+
+#play-again {
+    margin: 0 auto;
+    cursor: pointer;
+
+}
+
+#play-game {
+    color: aliceblue;
+    border-radius: 25px;
+    background-color: black;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

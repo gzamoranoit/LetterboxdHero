@@ -20,6 +20,7 @@
 
     <div id="game-over-text">
         <h2> Game Over </h2> 
+        <h2 id="game-over-message"> </h2> 
         <button id="play-again"> Play Again</button>
     </div>
 </div>    
@@ -31,7 +32,10 @@
     const popupOverlay = document.getElementById('popup-overlay');
     const popupImage = document.getElementById('popup-image');
     const popupMessage = document.getElementById('popup-message');   
+    const gameOverMessage = document.getElementById('game-over-message');   
     const savedLife = localStorage.getItem('userLife');
+
+
     if (savedLife>0) {
         life = parseInt(savedLife);
         livesSite = document.getElementById("life");
@@ -88,6 +92,18 @@
             console.log("FALSE") 
             life --;
             if (life == 0) {
+                if (score == 0) {
+                    gameOverMessage.textContent = "Are you asleep at the keyboard? Hello? Is there anyone there?"
+                    }
+                    else if (score <3){
+                    gameOverMessage.textContent = "I bet you think marvel movies are the pinnacle of cinema"
+                    }
+                    else if (score <6){
+                        gameOverMessage.textContent = "Not quite a score to be called a cinephile but alright"
+                        }
+                    else if(score <9){
+                        gameOverMessage.textContent = "You are kinda cracked at this"
+                        }
                 score = 0
             }
             livesSite = document.getElementById("life");
@@ -109,8 +125,7 @@
        
     },2000)// 2000 milliseconds = 2 seconds
     } else
-    {
-        document.getElementById('popup-content').classList.add('hidden')
+    {   document.getElementById('popup-content').classList.add('hidden')
         document.getElementById('game-over-text').classList.remove('hidden')
         document.getElementById('popup-overlay').classList.remove('hidden');
     }
