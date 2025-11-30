@@ -35,7 +35,16 @@ echo " "
 echo "--> STEP 3: Creating all indexes..."
 $PSQL_CMD -f ./sql/02_create_all_indexes.sql
 
+
+echo " "
+echo "--> STEP 6: Converting data types..."
+$PSQL_CMD -f ./sql/04_data_type_conversion.sql
+
+
+echo " "
+echo "--> STEP 5: Optimizing performance..."
+$PSQL_CMD -c "ANALYZE;"
+
 echo " "
 echo "=== DATABASE BUILD COMPLETE ==="
 
-  

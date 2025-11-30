@@ -1,4 +1,3 @@
-- ====================================================================
 -- MASTER INDEX CREATION SCRIPT (v2 - Complete)
 -- This script creates all primary keys and performance-critical indexes
 -- after all data has been successfully loaded as TEXT.
