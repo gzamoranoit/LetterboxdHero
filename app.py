@@ -4,6 +4,8 @@ from database import execute_query_from_text
 
 app = Flask(__name__)
 
+#We define the functions that populate each question based on difficulty level
+
 def generate_easy_trivia_question():
     print("Generating a new trivia question...")
     sql_file = "get_random_easy_question.sql"
@@ -24,12 +26,14 @@ def generate_hard_trivia_question():
     results = fetch_query_from_file(sql_file)
     if results:
         return results[0]
-                
+ 
+# Starting home menu for the app
+               
 @app.route('/') 
 def menu():
     return render_template('menu.html')
 
-
+# Trivia game logic that serves the html and makes the sql and the website interact
 @app.route('/play')
 def index():
     score_from_url = request.args.get('score', default=0, type=int)
