@@ -15,17 +15,20 @@
 
 body {
     margin: 600;
+    padding: 60px;
     font-family: "Body";
     font-weight: bolder;
 }
 
 .button {
     border: none;
-    color: black;
+    background-color: #36454F;
+    color: white;
     padding: 15px 32px;
+    border-radius: 25px;
     text-decoration: none;
     display: inline-block;
-    font-size: 66px;
+    font-size: 60px;
     width: 400px;
     height: 200px;
     overflow-wrap: break-word;
@@ -53,7 +56,10 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding-right: 200px
 }
+
+
 
 #popup-image {
     background-color: transparent;
@@ -67,6 +73,7 @@ body {
     align-items: center;
     gap: 20;
     text-align: center;
+    transform: translateX(-140px);
 }
 
 .hidden {
@@ -76,12 +83,18 @@ body {
 #game-over-text {
     border-radius: 15px;
     color: aliceblue;
-    background-color: black;
+    background-color: #070738;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 45px;
 }
+
+#game-over-text h2 {
+    font-size: 30px;
+    margin: 10px 0;
+}
+
 
 #title {
     font-family: "Poster";
@@ -104,4 +117,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#home-button {
+
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    background-color: white;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 30px;
+
+    transition: transform 0.2s ease, background-color 0.2s;
 }

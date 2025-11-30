@@ -2,6 +2,8 @@
 {% block head %}
 {% endblock  %}
 {% block body %}
+    
+<a href="/" id="home-button">Home</a>
 <h1>Who was the lead actor/actress in the {{year}} movie {{movie}}?</h1>   
 <h1 id="score"> Score: 0 </h1>  
 <h1 id="life"> Lives: 3 </h1>  
@@ -108,6 +110,9 @@
                     else if(score <9){
                         gameOverMessage.textContent = "You are kinda cracked at this"
                         }
+                        else if(score <15){
+                            gameOverMessage.textContent = "You must be cheating, right?"
+                            }
                 score = 0
             }
             livesSite = document.getElementById("life");
