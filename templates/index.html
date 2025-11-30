@@ -29,6 +29,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
+    const correctSound = new Audio("{{ url_for('static', filename='sound/correct-answer.wav') }}");
+    const wrongSound = new Audio("{{ url_for('static', filename='sound/wrong-answer.wav') }}");    
     const popupOverlay = document.getElementById('popup-overlay');
     const popupImage = document.getElementById('popup-image');
     const popupMessage = document.getElementById('popup-message');   
@@ -79,6 +81,7 @@
         const selectedAnswer = clickedButton.textContent;
         if (selectedAnswer == '{{actor}}') {
             popupMessage.textContent = "Correct!"
+            correctSound.play();
             popupImage.src = "{{ url_for('static', filename='images/tick.svg') }}"
             console.log("CORRECT!")
             score ++;
@@ -88,6 +91,7 @@
             localStorage.setItem('userLife', life);
         } else {
             popupMessage.textContent = "Wrong!"
+            wrongSound.play();
             popupImage.src = "{{ url_for('static', filename='images/error.svg') }}"
             console.log("FALSE") 
             life --;

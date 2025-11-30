@@ -17,7 +17,14 @@ def generate_medium_trivia_question():
     results = fetch_query_from_file(sql_file)
     if results:
         return results[0]
-        
+    
+def generate_hard_trivia_question():
+    print("Generating a new trivia question...")
+    sql_file = "get_random_hard_question.sql"
+    results = fetch_query_from_file(sql_file)
+    if results:
+        return results[0]
+                
 @app.route('/') 
 def menu():
     return render_template('menu.html')
@@ -27,10 +34,12 @@ def menu():
 def index():
     score_from_url = request.args.get('score', default=0, type=int)
     print(f"--- New Request --- Score from URL is: {score_from_url}")
-    if score_from_url > 4:
-        results=generate_medium_trivia_question()
+    if score_from_url < 5:
+        results=generate_easy_trivia_question() 
+    elif score_from_url < 10:
+        results=generate_medium_trivia_question()   
     else:
-        results=generate_easy_trivia_question()    
+        results=generate_hard_trivia_question() 
 
     movie_title, movie_year, lead_actor = results # type: ignore
     movie_year=int(movie_year)
